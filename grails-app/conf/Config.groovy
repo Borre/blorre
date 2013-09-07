@@ -94,7 +94,6 @@ log4j = {
 
 //Mongo DB
 grails.mongo.default.mapping = {
-    version false
     '*'(reference:true)
 }
 

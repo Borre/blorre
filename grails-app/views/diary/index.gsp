@@ -32,7 +32,7 @@
                                 ${fieldValue(bean: diaryInstance, field: "title")}
                             </g:link>
                         </h4>
-                        <small><g:formatDate date="${diaryInstance.dateTransaction}"/></small>
+                        <small><g:formatDate date="${diaryInstance.dateTransaction}" format="yyyy/MM/dd"/></small>
                         ${diaryInstance.post}
                     </div>
                 </div>

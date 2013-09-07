@@ -1,15 +1,11 @@
 package com.blorre.diary
 
 import com.blorre.calendar.BlorreCalendar
-import com.blorre.security.User
 import grails.plugins.springsecurity.Secured
-import grails.plugins.springsecurity.SpringSecurityService
 import org.springframework.dao.DataIntegrityViolationException
 
 @Secured(['ROLE_ADMIN'])
 class DiaryController {
-
-    SpringSecurityService springSecurityService
 
     static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
 
@@ -22,15 +18,14 @@ class DiaryController {
             case 'POST':
                 params.dateTransaction = new Date()
                 Diary diaryInstance = new Diary(params)
-                User currentUser = springSecurityService.currentUser as User
-                currentUser.addToDiaryPosts(diaryInstance)
-                BlorreCalendar day = BlorreCalendar.findOrCreateByDayToTrack(new Date().clearTime()).save(flush: true)
+
+                BlorreCalendar day = BlorreCalendar.findOrCreateByDayToTrack(new Date().clearTime())
                 day.addToDiaryEntrys(diaryInstance)
+
                 if (!diaryInstance.save(flush: true)) {
                     render view: 'index', model: [diaryInstance: diaryInstance]
                     return
                 }
-
                 flash.message = message(code: 'default.created.message', args: [message(code: 'diary.label', default: 'Diary'), diaryInstance.id])
                 redirect action: 'show', id: diaryInstance.id
                 break

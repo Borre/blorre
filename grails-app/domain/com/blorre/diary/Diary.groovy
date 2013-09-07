@@ -4,15 +4,12 @@ import com.blorre.calendar.BlorreCalendar
 import com.blorre.security.User
 class Diary {
 
-    transient springSecurityService
-
     String title
     String post
     Date dateTransaction = new Date()
 
     static belongsTo = [
-            day: BlorreCalendar,
-            user: User
+            day: BlorreCalendar
     ]
 
     static mapping = {
@@ -23,6 +20,5 @@ class Diary {
         post nullable: false
         dateTransaction nullable: false
         day nullable: true
-        user nullable: true
     }
 }

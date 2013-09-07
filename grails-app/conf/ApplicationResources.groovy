@@ -9,6 +9,5 @@ modules = {
     }
     diary {
         resource url: 'http://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.2/ckeditor.js'
-        resource url: '/js/ckeditor-config.js'
     }
 }

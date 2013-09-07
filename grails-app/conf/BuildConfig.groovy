@@ -28,7 +28,6 @@ grails.project.dependency.resolution = {
     }
 
     dependencies {
-
     }
 
     plugins {
@@ -36,13 +35,13 @@ grails.project.dependency.resolution = {
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
         compile ":spring-security-core:1.2.7.3"
-        runtime ":database-migration:1.3.2"
-        compile ':cache:1.0.1'
+        compile ':cache:1.1.1'
         runtime ":twitter-bootstrap:2.3.2"
         runtime ":fields:1.3"
-        runtime ":cache-headers:1.1.5"
-        runtime ":cached-resources:1.0"
-        runtime ":zipped-resources:1.0"
+        compile ":gson:1.1.4"
+        //runtime ":cache-headers:1.1.5"
+        //runtime ":cached-resources:1.0"
+        //runtime ":zipped-resources:1.0"
 
         build ":tomcat:$grailsVersion"
     }
