@@ -1,7 +1,5 @@
 package com.blorre.security
 
-import com.blorre.diary.Diary
-
 class User {
 
     transient springSecurityService
@@ -13,8 +11,6 @@ class User {
     boolean accountLocked
     boolean passwordExpired
 
-
-    static hasMany = [diaryPosts: Diary]
 
     static constraints = {
         username blank: false, unique: true
