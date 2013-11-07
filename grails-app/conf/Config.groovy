@@ -56,9 +56,6 @@ grails.web.disable.multipart=false
 // request parameters to mask when logging exceptions
 grails.exceptionresolver.params.exclude = ['password']
 
-// configure auto-caching of queries by default (if false you can cache individual queries with 'cache: true')
-grails.hibernate.cache.queries = false
-
 environments {
     development {
         grails.logging.jul.usebridge = true
@@ -73,12 +70,6 @@ environments {
 
 // log4j configuration
 log4j = {
-    // Example of changing the log pattern for the default console appender:
-    //
-    //appenders {
-    //    console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
-    //}
-
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -87,9 +78,9 @@ log4j = {
            'org.codehaus.groovy.grails.commons',            // core / classloading
            'org.codehaus.groovy.grails.plugins',            // plugins
            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework',
-           'org.hibernate',
-           'net.sf.ehcache.hibernate'
+           'org.springframework'
+
+    info 'org.eclipse.jetty'
 }
 
 //Mongo DB
@@ -105,5 +96,3 @@ grails.plugins.twitterbootstrap.defaultBundle = 'bundle_bootstrap'
 grails.plugins.springsecurity.userLookup.userDomainClassName = 'com.blorre.security.User'
 grails.plugins.springsecurity.userLookup.authorityJoinClassName = 'com.blorre.security.UserRole'
 grails.plugins.springsecurity.authority.className = 'com.blorre.security.Role'
-
-
