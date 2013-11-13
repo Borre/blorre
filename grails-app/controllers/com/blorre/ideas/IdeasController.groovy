@@ -30,9 +30,8 @@ class IdeasController {
             BlorreCalendar dayToTrack = BlorreCalendar.findOrCreateByDayToTrack(new Date().clearTime())
             dayToTrack.addToIdeas(ideasInstance)
 
-	        if (!ideasInstance.save(flush: true)) {
+	        if (!dayToTrack.save(flush: true) && !ideasInstance.save(flush: true)) {
 	            render view: 'create', model: [ideasInstance: ideasInstance]
-	            return
 	        }
 
 			flash.message = message(code: 'default.created.message', args: [message(code: 'ideas.label', default: 'Ideas'), ideasInstance.id])
@@ -42,7 +41,7 @@ class IdeasController {
     }
 
     def show() {
-        def ideasInstance = Ideas.get(params.id)
+        Ideas ideasInstance = Ideas.get(params.id)
         if (!ideasInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'ideas.label', default: 'Ideas'), params.id])
             redirect action: 'list'
@@ -96,7 +95,7 @@ class IdeasController {
     }
 
     def delete() {
-        def ideasInstance = Ideas.get(params.id)
+        Ideas ideasInstance = Ideas.get(params.id)
         if (!ideasInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'ideas.label', default: 'Ideas'), params.id])
             redirect action: 'list'

@@ -3,6 +3,7 @@
 <html>
 <head>
     <title>Borre</title>
+    <g:external uri="/img/favicon.ico"/>
 </head>
 <body>
 <h1>

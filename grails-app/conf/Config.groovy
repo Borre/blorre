@@ -69,7 +69,19 @@ environments {
 }
 
 // log4j configuration
+String productionLog = "${userHome}/logs/stacktrace.log".toString()
 log4j = {
+    environments {
+        development {
+            console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+        }
+        production {
+            appenders {
+                console name:'stdout', layout:pattern(conversionPattern: '%c{2} %m%n')
+                file name: 'stacktrace', file: productionLog
+            }
+        }
+    }
     error  'org.codehaus.groovy.grails.web.servlet',        // controllers
            'org.codehaus.groovy.grails.web.pages',          // GSP
            'org.codehaus.groovy.grails.web.sitemesh',       // layouts
@@ -78,14 +90,8 @@ log4j = {
            'org.codehaus.groovy.grails.commons',            // core / classloading
            'org.codehaus.groovy.grails.plugins',            // plugins
            'org.codehaus.groovy.grails.orm.hibernate',      // hibernate integration
-           'org.springframework'
-
-    info 'org.eclipse.jetty'
-}
-
-//Mongo DB
-grails.mongo.default.mapping = {
-    '*'(reference:true)
+           'org.springframework',
+           'org.eclipse.jetty'
 }
 
 //twitter bootstrap

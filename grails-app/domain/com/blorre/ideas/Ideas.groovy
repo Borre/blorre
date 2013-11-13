@@ -10,6 +10,10 @@ class Ideas {
 
     static belongsTo = [day: BlorreCalendar]
 
+    static mapping = {
+        idea(type: "text")
+    }
+
     static constraints = {
         title(nullable: false, blank: false)
         idea(nullable: true, blank: true)

@@ -13,20 +13,20 @@ class LastFmService {
     public void readFeed() {
         String lastFmHead = "http://ws.audioscrobbler.com/1.0/user/"
         GlobalConfiguration conf = GlobalConfiguration.first()
-            lastSong = LastFm.last()
-            println(lastSong.streamingDate)
-            URL url = (lastFmHead + conf.lastFmUser + "/recenttracks.rss").toURL()
-            Node feed = new XmlParser().parseText(url.text)
+        lastSong = LastFm.last()
+        log.info(lastSong?.streamingDate)
+        URL url = (lastFmHead + conf.lastFmUser + "/recenttracks.rss").toURL()
+        Node feed = new XmlParser().parseText(url.text)
 
-            Date lastRecord = lastFmDateFormat(feed.channel.item[0].pubDate.text())
+        Date lastRecord = lastFmDateFormat(feed.channel.item.get(0).pubDate.text())
 
-            if (lastRecord != lastSong?.streamingDate) {
-                feed.channel.item.each {
-                    String title = it.title.text()
-                    String playDate = it.pubDate.text()
-                    compareSongs(title, playDate)
-                }
+        if (lastRecord != lastSong?.streamingDate) {
+            feed.channel.item.each {
+                String title = it.title.text()
+                String playDate = it.pubDate.text()
+                compareSongs(title, playDate)
             }
+        }
 
     }
 
@@ -56,6 +56,7 @@ class LastFmService {
             currentSong.streamingDate = playDate
             BlorreCalendar day = BlorreCalendar.findOrCreateByDayToTrack(new Date().clearTime())
             day.addToSongs(currentSong)
+            day.save(flush: true)
             currentSong.save(flush: true)
         }
     }

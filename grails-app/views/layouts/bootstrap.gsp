@@ -29,15 +29,17 @@
                                  def allowedControllers = [
                                          'Diary',
                                          'Ideas',
-                                         'Logout'
+                                         'LastFm',
+                                         'Users'
                                  ]
                              %>
-							<li<%= request.forwardURI == "${createLink(uri: '/')}" ? ' class="active"' : '' %>><a href="${createLink(uri: '/')}">Home</a></li>
+							<li<%= request.forwardURI == "${createLink(uri: '/')}" ? ' class="active"' : '' %>><a href="${createLink(uri: '/admin')}">Home</a></li>
 							<g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
                                 <g:if test="${c.name in allowedControllers}">
 								    <li<%= c.logicalPropertyName == controllerName ? ' class="active"' : '' %>><g:link controller="${c.logicalPropertyName}">${c.name}</g:link></li>
                                 </g:if>
 							</g:each>
+                            <li><a href="${createLink(uri: '/logout')}">Logout</a></li>
 						</ul>
                         <sec:ifLoggedIn>
                         <p class="navbar-text pull-right">
@@ -53,7 +55,7 @@
 			<g:layoutBody/>
 			<hr>
 			<footer style="text-align: center">
-				<p>&copy; Company 2013</p>
+				<p>&copy; Eduardo Hernández 2013</p>
 			</footer>
 		</div>
 		<r:layoutResources/>

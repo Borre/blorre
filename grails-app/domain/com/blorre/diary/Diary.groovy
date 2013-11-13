@@ -14,6 +14,7 @@ class Diary {
 
     static mapping = {
         sort(dateTransaction: "desc")
+        post(type: "text")
     }
 
     static constraints = {

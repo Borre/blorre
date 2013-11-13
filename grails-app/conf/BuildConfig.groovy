@@ -30,7 +30,8 @@ grails.project.dependency.resolution = {
     }
 
     plugins {
-        compile ":mongodb:1.3.0"
+        runtime ":hibernate:$grailsVersion"
+
         runtime ":jquery:1.8.3"
         runtime ":resources:1.2"
         compile ":spring-security-core:1.2.7.3"

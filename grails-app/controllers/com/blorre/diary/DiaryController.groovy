@@ -7,7 +7,7 @@ import org.springframework.dao.DataIntegrityViolationException
 @Secured(['ROLE_ADMIN'])
 class DiaryController {
 
-    static allowedMethods = [create: ['GET', 'POST'], edit: ['GET', 'POST'], delete: 'POST']
+    static allowedMethods = [index: ['GET', 'POST'], show:['GET'], edit: ['GET', 'POST'], delete: 'POST']
 
     def index() {
         switch (request.method) {
@@ -22,7 +22,7 @@ class DiaryController {
                 BlorreCalendar day = BlorreCalendar.findOrCreateByDayToTrack(new Date().clearTime())
                 day.addToDiaryEntrys(diaryInstance)
 
-                if (!diaryInstance.save(flush: true)) {
+                if (!day.save(flush: true) || !diaryInstance.save(flush: true)) {
                     render view: 'index', model: [diaryInstance: diaryInstance]
                     return
                 }
@@ -33,7 +33,7 @@ class DiaryController {
     }
 
     def show() {
-        def diaryInstance = Diary.get(params.id)
+        Diary diaryInstance = Diary.get(params.id)
         if (!diaryInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'diary.label', default: 'Diary'), params.id])
             redirect action: 'index'
@@ -46,7 +46,7 @@ class DiaryController {
     def edit() {
 		switch (request.method) {
 		case 'GET':
-	        def diaryInstance = Diary.get(params.id)
+	        Diary diaryInstance = Diary.get(params.id)
 	        if (!diaryInstance) {
 	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'diary.label', default: 'Diary'), params.id])
 	            redirect action: 'index'
@@ -55,7 +55,7 @@ class DiaryController {
 	        [diaryInstance: diaryInstance]
 			break
 		case 'POST':
-	        def diaryInstance = Diary.get(params.id)
+	        Diary diaryInstance = Diary.get(params.id)
 	        if (!diaryInstance) {
 	            flash.message = message(code: 'default.not.found.message', args: [message(code: 'diary.label', default: 'Diary'), params.id])
 	            redirect action: 'index'
@@ -87,7 +87,7 @@ class DiaryController {
     }
 
     def delete() {
-        def diaryInstance = Diary.get(params.id)
+        Diary diaryInstance = Diary.get(params.id)
         if (!diaryInstance) {
 			flash.message = message(code: 'default.not.found.message', args: [message(code: 'diary.label', default: 'Diary'), params.id])
             redirect action: 'index'

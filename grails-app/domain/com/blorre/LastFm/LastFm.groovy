@@ -15,4 +15,8 @@ class LastFm {
         song(nullable: false, blank: false)
         day(nullable: false)
     }
+
+    static mapping = {
+        sort(streamingDate: "desc")
+    }
 }

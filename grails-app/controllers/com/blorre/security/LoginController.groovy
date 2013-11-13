@@ -1,4 +1,4 @@
-package com.blorre.secutiry
+package com.blorre.security
 
 import grails.converters.JSON
 
